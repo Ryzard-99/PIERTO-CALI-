@@ -96,7 +96,7 @@
 <body>
     <div class="container">
         <h1>Pietro Cali</h1>
-        <img src="eca6ef11-c3b9-4d90-b857-0f099de4a0d8.jpg" alt="Pietro Cali">
+        <img id="mainImage" src="eca6ef11-c3b9-4d90-b857-0f099de4a0d8.jpg" alt="Pietro Cali">
         <button id="changeGenderButton" onclick="changeGender()">PREMI per cambiare sesso</button>
         <p>Pietro Cali &egrave; un famosissimo bodybuilder dai capelli biondi e con la coda, conosciuto per il suo fisico incredibilmente muscoloso. La sua passione per il bodybuilding &egrave; nata da giovane, quando si rese conto del potere che il fitness poteva avere nel trasformare sia il corpo che la mente. Oggi, Pietro ispira milioni di persone in tutto il mondo a vivere una vita sana e a raggiungere il loro pieno potenziale.</p>
         <div>
@@ -115,7 +115,7 @@
         <button onclick="loginFunction()">Login</button>
     </div>
 
-    <div class="comment-box" id="commentBox">
+    <div class="comment-box" id="commentBox" style="display: none;">
         <textarea id="comment" placeholder="Scrivi un commento..."></textarea><br>
         <button onclick="submitComment()">Invia Commento</button>
     </div>
@@ -139,7 +139,7 @@
 
         function changeGender() {
             currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
-            document.querySelector(".container img").src = galleryImages[currentImageIndex];
+            document.getElementById("mainImage").src = galleryImages[currentImageIndex];
         }
 
         let likeCount = 0;
