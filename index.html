@@ -73,9 +73,29 @@
             margin-top: 20px;
         }
         .gallery img {
-            width: calc(50% - 10px);
+            width: calc(25% - 10px);
             max-width: 150px;
             height: auto;
+            border-radius: 10px;
+        }
+        .login-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .comment-box {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        textarea {
+            width: 100%;
+            max-width: 400px;
+            height: 100px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            font-size: 16px;
         }
     </style>
 </head>
@@ -93,6 +113,18 @@
         <p id="feedback"></p>
     </div>
 
+    <div class="login-container" id="loginContainer">
+        <h3>Login</h3>
+        <input type="text" id="username" placeholder="Nome utente"><br>
+        <input type="password" id="password" placeholder="Password"><br>
+        <button onclick="loginFunction()">Login</button>
+    </div>
+
+    <div class="comment-box" id="commentBox">
+        <textarea id="comment" placeholder="Scrivi un commento..."></textarea><br>
+        <button onclick="submitComment()">Invia Commento</button>
+    </div>
+
     <div class="gallery">
         <img src="Screenshot 2024-10-15 233112.png" alt="Pietro Cali Gallery Image 1">
         <img src="Screenshot 2024-10-15 233125.png" alt="Pietro Cali Gallery Image 2">
@@ -105,6 +137,7 @@
         let dislikeCount = 0;
         let hasLiked = false;
         let hasDisliked = false;
+        let isLoggedIn = false;
 
         function likeFunction() {
             if (!hasLiked && !hasDisliked) {
@@ -129,6 +162,54 @@
         function disableButtons() {
             document.getElementById('likeButton').disabled = true;
             document.getElementById('dislikeButton').disabled = true;
+        }
+
+        function loginFunction() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username && password) {
+                alert('Accesso effettuato con successo!');
+                isLoggedIn = true;
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('commentBox').style.display = 'block';
+                sendToDiscord(`Login effettuato da: ${username}`);
+            } else {
+                alert('Inserisci nome utente e password.');
+            }
+        }
+
+        function submitComment() {
+            const comment = document.getElementById('comment').value;
+            if (comment) {
+                alert('Commento inviato!');
+                sendToDiscord(`Nuovo commento: ${comment}`);
+                document.getElementById('comment').value = '';
+            } else {
+                alert('Inserisci un commento.');
+            }
+        }
+
+        function sendToDiscord(message) {
+            const webhookUrl = "https://discord.com/api/webhooks/1284187765998882979/4xGdiPNTlssTTx5Mp2KQbRZmSLypt2xUgmKuvUmdbHdCzEkNAxmV3gFxy3JI7ryAff0y";
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    content: message
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Messaggio inviato a Discord');
+                } else {
+                    console.error('Errore durante l'invio del messaggio a Discord');
+                }
+            })
+            .catch(error => {
+                console.error('Errore:', error);
+            });
         }
     </script>
 </body>
