@@ -102,7 +102,7 @@
 <body>
     <div class="container">
         <h1>Pietro Cali</h1>
-        <img src="eca6ef11-c3b9-4d90-b857-0f099de4a0d8.jpg" alt="Pietro Cali" style="width: 100%; max-width: 300px; height: auto;">
+        <button id="changeGenderButton" onclick="changeGender()" style="display: block; margin: 10px auto; padding: 12px 20px; font-size: 16px; cursor: pointer; border-radius: 4px; border: none; background-color: #008CBA; color: white;">PREMI per cambiare sesso</button>
         <p>Pietro Cali &egrave; un famosissimo bodybuilder dai capelli biondi e con la coda, conosciuto per il suo fisico incredibilmente muscoloso. La sua passione per il bodybuilding &egrave; nata da giovane, quando si rese conto del potere che il fitness poteva avere nel trasformare sia il corpo che la mente. Oggi, Pietro ispira milioni di persone in tutto il mondo a vivere una vita sana e a raggiungere il loro pieno potenziale.</p>
         <div>
             <button class="like" onclick="likeFunction()" id="likeButton">Mi piace</button>
@@ -125,7 +125,7 @@
         <button onclick="submitComment()">Invia Commento</button>
     </div>
 
-    <div class="gallery">
+    <div class="gallery" id="genderGallery" style="display: none;">
         <img src="Screenshot 2024-10-15 233112.png" alt="Pietro Cali Gallery Image 1">
         <img src="Screenshot 2024-10-15 233125.png" alt="Pietro Cali Gallery Image 2">
         <img src="Screenshot 2024-10-15 233143.png" alt="Pietro Cali Gallery Image 3">
@@ -133,6 +133,11 @@
     </div>
 
     <script>
+        function changeGender() {
+            const gallery = document.getElementById('genderGallery');
+            gallery.style.display = gallery.style.display === 'none' ? 'flex' : 'none';
+        }
+
         let likeCount = 0;
         let dislikeCount = 0;
         let hasLiked = false;
@@ -204,7 +209,7 @@
                 if (response.ok) {
                     console.log('Messaggio inviato a Discord');
                 } else {
-                    console.error('Errore durante l'invio del messaggio a Discord');
+                    console.error('Errore durante l\'invio del messaggio a Discord');
                 }
             })
             .catch(error => {
