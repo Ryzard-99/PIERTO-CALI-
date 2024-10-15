@@ -6,29 +6,28 @@
     <title>Pietro Cali - Bodybuilder</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(to right, #ffafbd, #ffc3a0);
             color: #333;
             padding: 20px;
+            text-align: center;
         }
         .container {
-            max-width: 400px;
+            max-width: 600px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 30px;
             background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.3);
         }
         @media (min-width: 600px) {
             .container {
-                max-width: 500px;
+                max-width: 700px;
             }
         }
         h1 {
-            text-align: center;
-            font-size: 28px;
-            font-weight: 500;
+            font-size: 36px;
+            font-weight: bold;
             margin-bottom: 20px;
             color: #333;
         }
@@ -36,16 +35,21 @@
             display: block;
             margin: 0 auto 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
         }
         button {
             margin: 10px;
-            padding: 12px 20px;
-            font-size: 16px;
+            padding: 15px 25px;
+            font-size: 18px;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 6px;
             border: none;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+        button:hover {
+            transform: scale(1.05);
         }
         .like {
             background-color: #4CAF50;
@@ -61,39 +65,29 @@
         .dislike:hover {
             background-color: #e53935;
         }
+        #changeGenderButton {
+            background-color: #008CBA;
+            color: white;
+        }
+        #changeGenderButton:hover {
+            background-color: #007bb5;
+        }
         .counter {
-            font-size: 18px;
+            font-size: 20px;
             margin-top: 10px;
+            font-weight: bold;
         }
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .gallery img {
-            width: calc(25% - 10px);
-            max-width: 150px;
-            height: auto;
-            border-radius: 10px;
-        }
-        .login-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .comment-box {
-            display: none;
+        .login-container, .comment-box {
             text-align: center;
             margin-top: 20px;
         }
         textarea {
-            width: 100%;
-            max-width: 400px;
+            width: calc(100% - 20px);
+            max-width: 500px;
             height: 100px;
             margin-bottom: 10px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
+            border-radius: 6px;
+            border: 2px solid #ddd;
             padding: 10px;
             font-size: 16px;
         }
@@ -102,7 +96,8 @@
 <body>
     <div class="container">
         <h1>Pietro Cali</h1>
-        <button id="changeGenderButton" onclick="changeGender()" style="display: block; margin: 10px auto; padding: 12px 20px; font-size: 16px; cursor: pointer; border-radius: 4px; border: none; background-color: #008CBA; color: white;">PREMI per cambiare sesso</button>
+        <img src="eca6ef11-c3b9-4d90-b857-0f099de4a0d8.jpg" alt="Pietro Cali">
+        <button id="changeGenderButton" onclick="changeGender()">PREMI per cambiare sesso</button>
         <p>Pietro Cali &egrave; un famosissimo bodybuilder dai capelli biondi e con la coda, conosciuto per il suo fisico incredibilmente muscoloso. La sua passione per il bodybuilding &egrave; nata da giovane, quando si rese conto del potere che il fitness poteva avere nel trasformare sia il corpo che la mente. Oggi, Pietro ispira milioni di persone in tutto il mondo a vivere una vita sana e a raggiungere il loro pieno potenziale.</p>
         <div>
             <button class="like" onclick="likeFunction()" id="likeButton">Mi piace</button>
@@ -133,9 +128,18 @@
     </div>
 
     <script>
+        let currentImageIndex = 0;
+        const galleryImages = [
+            "eca6ef11-c3b9-4d90-b857-0f099de4a0d8.jpg",
+            "Screenshot 2024-10-15 233112.png",
+            "Screenshot 2024-10-15 233125.png",
+            "Screenshot 2024-10-15 233143.png",
+            "Screenshot 2024-10-15 233155.png"
+        ];
+
         function changeGender() {
-            const gallery = document.getElementById('genderGallery');
-            gallery.style.display = gallery.style.display === 'none' ? 'flex' : 'none';
+            currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+            document.querySelector(".container img").src = galleryImages[currentImageIndex];
         }
 
         let likeCount = 0;
@@ -209,7 +213,7 @@
                 if (response.ok) {
                     console.log('Messaggio inviato a Discord');
                 } else {
-                    console.error('Errore durante l\'invio del messaggio a Discord');
+                    console.error('Errore durante l'invio del messaggio a Discord');
                 }
             })
             .catch(error => {
