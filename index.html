@@ -92,6 +92,12 @@
             padding: 10px;
             font-size: 16px;
         }
+        .login-container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.2);
+        }
     </style>
 </head>
 <body>
@@ -107,18 +113,18 @@
         <p class="counter">Mi piace: <span id="likeCount">0</span></p>
         <p class="counter">Non mi piace: <span id="dislikeCount">0</span></p>
         <p id="feedback"></p>
-    </div>
 
-    <div class="login-container" id="loginContainer">
-        <h3>Login</h3>
-        <input type="text" id="username" placeholder="Nome utente"><br>
-        <input type="password" id="password" placeholder="Password"><br>
-        <button onclick="loginFunction()">Login</button>
-    </div>
+        <div class="login-container" id="loginContainer">
+            <h3>Login</h3>
+            <input type="text" id="username" placeholder="Nome utente"><br>
+            <input type="password" id="password" placeholder="Password"><br>
+            <button onclick="loginFunction()">Login</button>
+        </div>
 
-    <div class="comment-box" id="commentBox" style="display: none;">
-        <textarea id="comment" placeholder="Scrivi un commento..."></textarea><br>
-        <button onclick="submitComment()">Invia Commento</button>
+        <div class="comment-box" id="commentBox" style="display: none;">
+            <textarea id="comment" placeholder="Scrivi un commento..."></textarea><br>
+            <button onclick="submitComment()">Invia Commento</button>
+        </div>
     </div>
 
     <script>
@@ -206,12 +212,15 @@
             .then(response => {
                 if (response.ok) {
                     console.log('Messaggio inviato a Discord');
+                    document.getElementById('feedback').innerText = 'Messaggio inviato con successo a Discord.';
                 } else {
-                    console.error('Errore durante l'invio del messaggio a Discord');
+                    console.error('Errore durante l\'invio del messaggio a Discord');
+                    document.getElementById('feedback').innerText = 'Errore durante l\'invio del messaggio a Discord.';
                 }
             })
             .catch(error => {
                 console.error('Errore:', error);
+                document.getElementById('feedback').innerText = 'Errore durante l\'invio del messaggio a Discord.';
             });
         }
     </script>
